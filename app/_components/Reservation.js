@@ -20,7 +20,11 @@ async function Reservation({ cabin }) {
         cabin={cabin}
       />
       {session?.user ? (
-        <ReservationForm cabin={cabin} user={session.user} />
+        <ReservationForm
+          bookedDates={bookedDates}
+          cabin={cabin}
+          user={session.user}
+        />
       ) : (
         <LoginMessage />
       )}
