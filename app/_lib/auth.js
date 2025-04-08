@@ -2,6 +2,8 @@ import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
 import { createGuest, getGuest } from "./data-service";
 
+const trustedDomains = ["http://localhost:3000/api/auth/session"];
+
 const authConfig = {
   providers: [
     Google({
@@ -30,6 +32,9 @@ const authConfig = {
     },
   },
   pages: { signIn: "/login" },
+  trustHost: ({ host, url }) => {
+    return trustedDomains.some((domain) => url.startsWith(domain));
+  },
 };
 
 export const {
